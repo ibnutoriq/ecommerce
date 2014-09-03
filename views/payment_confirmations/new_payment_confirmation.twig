@@ -1,0 +1,18 @@
+{% extends 'application.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	{% if is_order != 0 %}
+		{% for order in orders %}
+			<hr>
+			<h4>Your Total Payment: Rp. {{ order.total|number_format('2', ',', '.') }} </h4>
+			<h4>Created At: {{ order.created_at }}</h4>
+			<p>Transfer your total payment to:</p>
+			<p>5220 875 678 (BCA)</p>
+			<p>a.n Annisa</p>
+			<hr>
+			{% include '_form_payment_confirmation.twig' %}
+		{% endfor %}
+	{% else %}
+		Your payment is empty. 
+	{% endif %}
+{% endblock %}

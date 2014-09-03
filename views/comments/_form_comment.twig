@@ -1,0 +1,13 @@
+<form action="add-comment" method="POST">
+	{% for result in results %}
+		<input type="hidden" name="productID" value="{{ result.product_id }}">
+		<div class="form-group">
+			<div class="input-group">
+				<textarea name="comment" class="form-control"></textarea>
+			</div>
+		</div>
+		<div class="form-group">
+			<button class="btn btn-primary">Submit</button>
+		</div>
+	{% endfor %}
+</form>

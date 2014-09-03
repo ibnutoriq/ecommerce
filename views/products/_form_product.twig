@@ -1,0 +1,46 @@
+<form action="" method="POST" enctype="multipart/form-data">
+	<div class="form-group">
+		<div class="input-group">
+			<label for="name">Name</label><br />
+			<input type="text" name="name" value="{{ tmp_name != null ? tmp_name : result.p_name|default('') }}" class="form-control" maxlength="50">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="category">Category</label><br />
+			<select name="category" class="form-control">
+				<option {{ result.category == 'Gaun' ? 'selected' }}>Gaun</option>
+				<option {{ result.category == 'Kaos' ? 'selected' }}>Kaos</option>
+				<option {{ result.category == 'Celana Jeans' ? 'selected' }}>Celana Jeans</option>
+				<option {{ result.category == 'Celana Rok' ? 'selected' }}>Celana Rok</option>
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="description">Description</label><br />
+			<textarea name="description" class="form-control">{{ tmp_description != null ? tmp_description : result.description|default('') }}</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="image">Image</label><br />
+			<input type="file" name="image" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="price">Price</label><br />
+			<input type="text" name="price" value="{{ tmp_price != null ? tmp_price : result.price|default('') }}" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="stock">Stock</label><br />
+			<input type="text" name="stock" value="{{ tmp_stock != null ? tmp_stock : result.stock|default('') }}" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<button class="btn btn-primary btn-sm">Submit</button>
+	</div>
+</form>

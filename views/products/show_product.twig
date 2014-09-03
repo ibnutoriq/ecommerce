@@ -1,0 +1,85 @@
+{% extends 'application.twig' %}
+{% block content %}
+	{% if info_cart is not empty %}
+		<div class="alert alert-success">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<P>{{ info_cart }}</P>
+		</div>
+	{% endif %}
+	{% if info_comment is not empty %}
+		<div class="alert alert-info">
+			<button type="button" class="close" data-dismiss="alert" aria-hidden="true">&times;</button>
+			<P>{{ info_comment }}</P>
+		</div>
+	{% endif %}
+	<div class="row">
+		<div class="col-md-3">
+			{% for result in results %}
+				<img src="{{ app_base }}/{{ result.p_image }}" width="200" height="200">
+		</div>
+		<div class="col-md-7">
+			<form action="" method="POST">
+				<div class="form-group">
+					<h4>Quantity</h4>
+					<input type="hidden" name="productID" value="{{ result.product_id }}">
+					<div class="input-group">
+						<select name="quantity">
+							<option>1</option>
+							<option>2</option>
+							<option>3</option>
+							<option>4</option>
+							<option>5</option>
+						</select> x Rp. {{ result.price|number_format('2', ',', '.')  }}
+					</div>
+				</div>
+				{% if is_order == 0 %}
+					<div class="form-group"><button type="submit" class="btn btn-primary btn-sm">Add to Cart</button></div>
+				{% else %}
+					Please delete your <a href="order-status"><strong>Order Status</strong></a> or pay your <a href="payment-confirmation"><strong>Payment Confirmation</strong></a> to add product to cart
+				{% endif %}
+			</form>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-6">
+			<dt><h2>{{ result.p_name }}</h2></dt>
+			<dd>{{ result.description | raw }}</dd>
+			{% endfor %}
+		</div>
+	</div>
+	<div class="row">
+		<h3>Related Products</h3>
+		{% for product in related_product %}
+			<div class="col-md-2">
+				<div class="panel panel-default">
+					<div class="panel-body">
+						<a href="products/show/{{ product.product_id }}"><img src="{{ app_base }}/{{ product.p_image }}" class="img-responsive"></a>
+					</div>
+					<div class="panel-footer">
+						<strong>{{ product.p_name | striptags | slice(0, 15) }}</strong>
+					</div>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<div class="row">
+		<h3>Comments</h3>
+		{% if is_customer != 0 %}
+			{% include '_form_comment.twig' %}
+		{% else %}
+			<a href="login-customer" class="btn btn-sm btn-primary">Login</a></li> or
+	    <a href="new-customer" class="btn btn-sm btn-success">Register</a></li> to add comment.
+		{% endif %}
+	</div>
+	<div class="row">
+		{% for comment in comments %}
+			<div class="row">
+				<div class="col-xs-6">
+					<hr>
+					<h4 class="product-name"><strong>{{ comment.c_name }}</strong></h4>
+					<h6>{{ comment.comment|raw }}</h6>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+{% endblock %}

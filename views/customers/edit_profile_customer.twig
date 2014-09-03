@@ -1,0 +1,7 @@
+{% extends 'application.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	{% for result in results %}
+		{% include '_form_customer_profile.twig' %}
+	{% endfor %}
+{% endblock %}

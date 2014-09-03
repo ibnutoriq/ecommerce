@@ -1,0 +1,44 @@
+{% extends 'application_admin.twig' %}
+
+{% block content %}
+	<h1>{{ title }}</h1>
+	<div class="row">
+		<div class="col-md-5">
+			<form action="admin/sales_report" method="POST">
+				<input type="date" name="createdAt1"> - 
+				<input type="date" name="createdAt2">
+				<button type="submit" class="btn btn-primary">Show</button>
+			</form>
+		</div>
+		<div class="col-md-7">
+			<h3>Your Money: Rp. {{ grand_total|number_format('2', ',', '.') }}</h3>
+		</div>
+	</div>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Total</th>
+					<th>Date</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<tr>
+						<td><a href="admin/orders/order_details/{{ result.order_id }}">{{ result.order_id }}</a></td>
+						<td>Rp. {{ result.total|number_format('2', ',', '.') }}</td>
+						<td>{{ result.created_at }}</td>
+					</tr>	
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	{% if title == 'Sales Report' %}
+		<ul class="pagination">
+		  {% for page in sales_report_page %}
+		  	{{ page|raw }}
+		  {% endfor %}
+		</ul>
+	{% endif %}
+{% endblock %}

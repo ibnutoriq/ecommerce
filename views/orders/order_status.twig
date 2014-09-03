@@ -1,0 +1,37 @@
+{% extends 'application.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Phone</th>
+					<th>Status</th>
+					<th>Total</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<form action="order-status/delete/{{ result.order_id }}" method="POST">
+						<tr>
+							<td>{{ result.c_name }}</td>
+							<td>{{ result.address }}</td>
+							<td>{{ result.phone }}</td>
+							<td>{{ result.status }}</td>
+							<td>Rp. {{ result.total|number_format('2', ',', '.') }}</td>
+							<td>
+								{% if result.status == 'Pending' %}
+									<button type="submit" onclick="return confirm('Are you sure to delete this order?');" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</button>
+								{% endif %}
+								<a href="order-status/show-order-details/{{ result.order_id }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> View</button>
+							</td>
+						</tr>
+					</form>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+{% endblock %}

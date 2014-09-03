@@ -1,0 +1,39 @@
+{% extends 'application_admin.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	<a class="btn btn-primary" href="admin/customers/new"><span class="glyphicon glyphicon-plus"></span> Add New</a><br><br>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Action</th>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Phone</th>
+					<th>Notes</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<tr>
+						<td>
+							<a href="admin/customers/edit/{{ result.customer_id }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+							<a href="admin/customers/delete/{{ result.customer_id }}" onclick="return confirm('Are you sure to delete this record?');" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+						</td>
+						<td>{{ result.c_email }}</td>
+						<td>{{ result.c_name }}</td>
+						<td>{{ result.address }}</td>
+						<td>{{ result.phone }}</td>
+						<td>{{ result.notes | striptags | slice(0, 20) }}...</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<ul class="pagination">
+	  {% for page in customer_page %}
+	  	{{ page|raw }}
+	  {% endfor %}
+	</ul>
+{% endblock %}

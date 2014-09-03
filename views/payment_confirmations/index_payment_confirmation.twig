@@ -1,0 +1,51 @@
+{% extends 'application_admin.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Order ID</th>
+					<th>Bank Name</th>
+					<th>Bank Account</th>
+					<th>Bank Account Name</th>
+					<th>Transfer Date</th>
+					<th>Status</th>
+					<th>Transfer Nominal</th>
+					<th>Total Payment</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<form action="admin/payment_confirmations/{{ result.payment_confirmation_id }}" method="POST">
+						<tr>
+							<td>{{ result.order_id }}</td>
+							<td>{{ result.bank_name }}</td>
+							<td>{{ result.bank_account }}</td>
+							<td>{{ result.bank_account_name }}</td>
+							<td>{{ result.transfer_date }}</td>
+							<td>
+								<select name="status">
+									<option {{ result.status == 'Unverified' ? 'selected' : null }}>Unverified</option>
+									<option {{ result.status == 'Verified' ? 'selected' : null }}>Verified</option>
+								</select>
+							</td>
+							<td>Rp. {{ result.transfer_nominal|number_format('2', ',', '.') }}</td>
+							<td>Rp. {{ result.total_payment|number_format('2', ',', '.') }}</td>
+							<td>
+								<button type="submit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-refresh"></span> Update</button>
+								<a href="admin/payment_confirmations/delete/{{ result.payment_confirmation_id }}" onclick="return confirm('Are you sure to delete this record?');" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+							</td>
+						</tr>
+					</form>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<ul class="pagination">
+	  {% for page in payment_confirmation_page %}
+	  	{{ page|raw }}
+	  {% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <base href="http://localhost/kaswati/ecommerce/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ app_base }}/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+	<header>
+
+	</header>
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="admin" class="navbar-brand">My Store Admin</a>
+			<div class="collapse navbar-collapse">
+				<ul class="nav navbar-nav">
+					<li><a href="admin/carousels">Carousels</a></li>
+					<li><a href="admin/customers">Customers</a></li>
+					<li><a href="admin/comments">Comments</a></li>
+					<li><a href="admin/orders">Orders</a></li>
+					<li><a href="admin/payment_confirmations">Payment Confirmations</a></li>
+					<li><a href="admin/products">Products</a></li>
+					<li><a href="admin/sales_report">Sales Report</a></li>
+					<li><a href="admin/users">Users</a></li>
+				</ul>
+				<ul class="nav navbar-nav navbar-right">
+					<li><a href="logout-admin">Logout</a></li>
+				</ul>
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+		{% block content %}{% endblock %}
+	</div>
+
+	<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.min.js"></script>
+	{% if title == 'New Carousel' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/carousel.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript">
+			tinymce.init({
+				selector: "textarea",
+				toolbar: "undo redo | stylesheet | bold italic | alignleft aligncenter alignjustify | bullist numlist outdent indent | link"
+			});
+		</script>
+	{% endif %}
+	{% if title == 'New Customer' or title == 'Edit Customer' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/customer.js"></script>
+	{% endif %}
+	{% if title == 'New Product' or title == 'Edit Product' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/product.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript">
+			tinymce.init({
+				selector: "textarea",
+				toolbar: "undo redo | stylesheet | bold italic | alignleft aligncenter alignjustify | bullist numlist outdent indent | link"
+			});
+		</script>
+	{% endif %}
+	{% if title == 'New User' or title == 'Edit User' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/user.js"></script>
+	{% endif %}
+	<script type="text/javascript" src="{{ app_base }}/assets/js/bootstrap.min.js"></script>
+
+	<hr>
+	<div class="footer">
+		<div class="container">
+			<p>&copy; My Store &middot; 2013</p>
+		</div>
+	</div>
+</body>
+</html>

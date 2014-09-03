@@ -1,0 +1,51 @@
+<form action="" method="POST">
+	<div class="form-group">
+		<div class="input-group">
+			<label for="email">Email</label><br />
+			<input type="email" name="email" value="{{ tmp_email != null ? tmp_email : result.c_email|default('') }}" placeholder="e.g your@email.com" class="form-control" maxlength="100">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			{% if title == 'Edit User' %}
+				<label for="newPassword">New Password</label><br/ >
+			{% else %}
+				<label for="password">Password</label><br/ >
+			{% endif %}
+			<input type="password" name="password" id="password" placeholder="******" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="verifyPassword">Verify Password</label><br/ >
+			<input type="password" name="verifyPassword" placeholder="******" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="name">Name</label><br />
+			<input type="text" name="name" value="{{ tmp_name != null ? tmp_name : result.c_name|default('') }}" placeholder="e.g Patrick Star" class="form-control" maxlength="50">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="address">Address</label><br />
+			<textarea name="address" placeholder="e.g Bikini Bottom" class="form-control">{{ tmp_address != null ? tmp_address : result.address|default('') }}</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="phone">Phone</label><br />
+			<input type="text" name="phone" value="{{ tmp_phone != null ? tmp_phone : result.phone|default('') }}" placeholder="e.g +6283808371226" class="form-control" maxlength="50">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="notes">notes</label><br />
+			<textarea name="notes" placeholder="e.g Sir, i want you to bla bla bla" class="form-control">{{ tmp_notes != null ? tmp_notes : result.notes|default('') }}</textarea>
+		</div>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+	</div>
+</form>

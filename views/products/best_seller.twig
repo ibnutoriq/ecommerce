@@ -1,0 +1,12 @@
+<div class="panel panel-info">
+	<div class="panel-heading">Best Seller</div>
+	{% for best_seller in best_sellers %}
+		<div class="list-group">
+			<a href="" class="list-group-item">
+				<img src="{{ app_base }}/{{ best_seller.p_image }}" align="left">
+				<h5 class="list-group-item-heading">{{ best_seller.p_name }}</h5>
+				<p class="list-group-item-text">Rp. {{ best_seller.price|number_format('2', ',', '.') }}</p>
+			</a>
+		</div>
+	{% endfor %}
+</div>

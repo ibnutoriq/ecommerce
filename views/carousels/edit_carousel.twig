@@ -1,0 +1,7 @@
+{% extends 'application_admin.twig' %}
+
+{% block content %}
+	{% for result in results %}
+		{% include '_form_carousel.twig' %}
+	{% endfor %}
+{% endblock %}

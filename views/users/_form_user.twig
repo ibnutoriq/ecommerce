@@ -1,0 +1,47 @@
+<form action="" method="POST" enctype="multipart/form-data">
+	<div class="form-group">
+		<div class="input-group">
+			<label for="email">Email</label><br/ >
+			<input type="email" name="email" value="{{ tmp_email != null ? tmp_email : result.u_email|default('') }}" class="form-control" maxlength="100">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			{% if title == 'Edit User' %}
+				<label for="newPassword">New Password</label><br/ >
+			{% else %}
+				<label for="password">Password</label><br/ >
+			{% endif %}
+			<input type="password" name="password" id="password" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="verifyPassword">Verify Password</label><br/ >
+			<input type="password" name="verifyPassword" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="image">Image</label><br/ >
+			<input type="file" name="image" class="form-control">
+		</div>
+	</div>
+	<div class="form-group">
+		<div class="input-group">
+			<label for="level">Level</label><br />
+			<select name="level" class="form-control">
+				{% if result.level == 1 %}
+					<option value="1" selected>1</option>
+					<option value="2">2</option>
+				{% else %}
+					<option value="1">1</option>
+					<option value="2" selected>2</option>
+				{% endif %}
+			</select>
+		</div>
+	</div>
+	<div class="form-group">
+		<button type="submit" class="btn btn-primary btn-sm">Submit</button>
+	</div>
+</form>

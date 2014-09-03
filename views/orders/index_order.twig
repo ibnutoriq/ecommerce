@@ -1,0 +1,52 @@
+{% extends 'application_admin.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>ID</th>
+					<th>Email</th>
+					<th>Name</th>
+					<th>Address</th>
+					<th>Phone</th>
+					<th>Status</th>
+					<th>Total</th>
+					<th>Action</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<form action="admin/orders/{{ result.order_id }}" method="POST">
+						<tr>
+							<td>{{ result.customer_id }}</td>
+							<td>{{ result.c_email }}</td>
+							<td>{{ result.c_name }}</td>
+							<td>{{ result.address }}</td>
+							<td>{{ result.phone }}</td>
+							<td>
+								<select name="status">
+									<option {{ result.status == 'Pending' ? 'selected' : null }}>Pending</option>
+									<option {{ result.status == 'In Process' ? 'selected' : null }}>In Process</option>
+									<option {{ result.status == 'Shipping' ? 'selected' : null }}>Shipping</option>
+									<option {{ result.status == 'Delivered' ? 'selected' : null }}>Delivered</option>
+								</select>
+							</td>
+							<td>Rp. {{ result.total|number_format('2', ',', '.') }}</td>
+							<td>
+								<button type="submit" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-refresh"></span> Update</button>
+								<a href="admin/orders/order_details/{{ result.order_id }}" class="btn btn-success btn-xs"><span class="glyphicon glyphicon-search"></span> View</a>
+								<a href="admin/orders/delete/{{ result.order_id }}" onclick="return confirm('Are you sure to delete this record?');" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+							</td>
+						</tr>
+					</form>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<ul class="pagination">
+	  {% for page in order_page %}
+	  	{{ page|raw }}
+	  {% endfor %}
+	</ul>
+{% endblock %}

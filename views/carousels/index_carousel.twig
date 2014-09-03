@@ -1,0 +1,35 @@
+{% extends 'application_admin.twig' %}
+{% block content %}
+	<h1>{{ title }}</h1>
+	<a class="btn btn-primary" href="admin/carousels/new"><span class="glyphicon glyphicon-plus"></span> Add New</a><br><br>
+	<div class="table-responsive">
+		<table class="table table-bordered table-striped">
+			<thead>
+				<tr>
+					<th>Action</th>
+					<th>Image</th>
+					<th>title</th>
+					<th>Description</th>
+				</tr>
+			</thead>
+			<tbody>
+				{% for result in results %}
+					<tr>
+						<td align="center"><a href="{{ app_base }}/{{ result.image }}"><img src="{{ app_base }}/{{ result.image }}" width="150" height="150" class="img img-responsive img-rounded"></a></td>
+						<td>{{ result.title }}</td>
+						<td>{{ result.description|raw }}</td>
+						<td>
+							<a href="admin/carousels/edit/{{ result.carousel_id }}" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+							<a href="admin/carousels/delete/{{ result.carousel_id }}" onclick="return confirm('Are you sure to delete this record?');" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-trash"></span> Delete</a>
+						</td>
+					</tr>
+				{% endfor %}
+			</tbody>
+		</table>
+	</div>
+	<ul class="pagination">
+	  {% for page in carousel_page %}
+	  	{{ page|raw }}
+	  {% endfor %}
+	</ul>
+{% endblock %}

@@ -1,0 +1,19 @@
+<div id="slide-promo" class="carousel slide">
+	<div class="carousel-inner">
+		{% for carousel in carousels %}
+			<div class="item {{ carousel.carousel_id == loop.first ? 'active' : null }}">
+				<img src="{{ app_base }}/{{ carousel.image }}" class="img img-responsive">
+				<div class="carousel-caption">
+					<h3>{{ carousel.title }}</h3>
+					<p>{{ carousel.description|raw }}</p>
+				</div>
+			</div>
+		{% endfor %}
+	</div>
+	<a class="left carousel-control" href="#slide-promo" data-slide="prev">
+	<span class="glyphicon glyphicon-chevron-left"></span>
+	</a>
+	<a class="right carousel-control" href="#slide-promo" data-slide="next">
+	<span class="glyphicon glyphicon-chevron-right"></span>
+	</a>
+</div>

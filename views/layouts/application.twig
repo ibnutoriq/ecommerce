@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>{{ title }}</title>
+
+    <base href="http://localhost/kaswati/ecommerce/">
+
+    <!-- Bootstrap core CSS -->
+    <link href="{{ app_base }}/assets/css/bootstrap.min.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="{{ app_base }}/assets/css/style.css" rel="stylesheet">
+
+    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <![endif]-->
+  </head>
+<body>
+	<header>
+
+	</header>
+	<nav class="navbar navbar-inverse navbar-static-top">
+		<div class="container">
+			<button class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+				<span class="icon-bar"></span>
+			</button>
+			<a href="#" class="navbar-brand">My Store</a>
+			<div class="collapse navbar-collapse">
+				{% if is_customer != 0 %}
+					<ul class="nav navbar-nav">
+						<li><a href="customer-profile"><span class="glyphicon glyphicon-user"></span> Profile</a></li>
+						<li><a href="payment-confirmation"><span class="glyphicon glyphicon-usd"></span> Payment Confirmation</a></li>
+						<li><a href="order-status"><span class="glyphicon glyphicon-plane"></span> Order Status</a></li>
+					</ul>
+				{% endif %}
+				{% if is_customer == 0 %}
+					{% if title != 'New Customer' %}
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="login-customer" class="btn-primary"><font color="#FFF">Login</font></a></li>
+	        		<li><a href="new-customer" class="btn-success"><font color="#FFF">Register</font></a></li>
+						</ul>
+					{% endif %}
+				{% endif %}
+				{% if is_customer != 0 %}
+					{% if title != 'Your Carts' %}
+						<ul class="nav navbar-nav navbar-right">
+							<li><a href="carts"><span class="glyphicon glyphicon-shopping-cart"></span> Your Carts {{ carts }}</a></li>
+							<li><a class="btn-primary" href="logout-customer"><font color="#FFF">Logout</font></a></li>
+						</ul>
+					{% endif %}
+				{% endif %}
+			</div>
+		</div>
+	</nav>
+	
+	<div class="container">
+		{% block content %}{% endblock %}
+	</div>
+
+	<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.min.js"></script>
+	{% if bugs1 == true  %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/comment.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/tinymce/tinymce.min.js"></script>
+		<script type="text/javascript">
+			tinymce.init({
+				selector: "textarea",
+				toolbar: "undo redo | stylesheet | bold italic | alignleft aligncenter alignjustify | bullist numlist outdent indent | link"
+			});
+		</script>
+	{% endif %}
+	{% if title == 'New Customer' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/customer.js"></script>
+	{% endif %}
+	{% if title == 'Payment Confirmation' or title == 'Payment Confirmation' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/paymentConfirmation.js"></script>
+	{% endif %}
+	{% if title == 'Edit Profile' %}
+		<script type="text/javascript" src="{{ app_base }}/assets/js/jquery.validate.min.js"></script>
+		<script type="text/javascript" src="{{ app_base }}/assets/js/customer.js"></script>
+	{% endif %}
+	<script type="text/javascript" src="{{ app_base }}/assets/js/bootstrap.min.js"></script>
+	
+	<hr>
+	<div class="footer">
+		<div class="container">
+			<p>&copy; My Store &middot; 2013</p>
+		</div>
+	</div>
+</body>
+</html>

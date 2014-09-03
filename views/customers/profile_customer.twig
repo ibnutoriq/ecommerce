@@ -1,0 +1,20 @@
+{% extends 'application.twig' %}
+
+{% block content %}
+	<div class="col-md-6">
+		{% for result in results %}
+			<h1>{{ result.c_name|capitalize }}'s {{ title }}</h1>
+			Email: {{ result.c_email }}
+			<hr>
+			Name: {{ result.c_name }}
+			<hr>
+			Address: {{ result.address }}
+			<hr>
+			Phone: {{ result.phone }}
+			<hr>
+			Notes: {{ result.notes }}
+			<hr>
+			<a href="customer-profile/edit" class="btn btn-primary"><span class="glyphicon glyphicon-pencil"></span> Edit</a>
+		{% endfor %}
+	</div> 
+{% endblock %}
